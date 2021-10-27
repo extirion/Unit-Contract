@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.25;
 
-import "./ConvertLib.sol";
-
 contract Unit {
     mapping (address => uint) balances;
 
@@ -10,10 +8,6 @@ contract Unit {
 
     constructor() public{
         balances[msg.sender] = 10000;
-    }
-
-    function getBalanceInEth(address addr) public view returns(uint) {
-        return ConvertLib.convert(getBalance(addr),2);
     }
 
     function getBalance(address addr) public view returns(uint) {
