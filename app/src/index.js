@@ -38,7 +38,7 @@ const App = {
   },
 
   runTest: async function() {
-    const amount = 500;
+    const amount = 2;
     const receiver = document.getElementById("receiver").value;
 
     this.setStatus("Iniciando transacción... (por favor espere)");
@@ -51,7 +51,7 @@ const App = {
   },
 
   setStatus: function(message) {
-    const status = document.getElementById("estatus");
+    const status = document.getElementById("status");
     status.innerHTML = message;
   },
 };
