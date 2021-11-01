@@ -30,6 +30,7 @@ const App = {
   },
 
   refescarBalance: async function() {
+    console.log(this.account);
     const { getBalance } = this.meta.methods;
     const balance = await getBalance().call();
 

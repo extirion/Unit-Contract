@@ -9,7 +9,7 @@ contract Unit {
 
     //Constructor
     constructor() public {
-        balances[msg.sender] = 1000;
+        balances[msg.sender] = 14000;
     }
 
     //Metodos
