@@ -31,7 +31,7 @@ const App = {
 
   refescarBalance: async function() {
     const { getBalance } = this.meta.methods;
-    const balance = await getBalance(this.account).call();
+    const balance = await getBalance().call();
 
     const balanceElement = document.getElementsByClassName("balance")[0];
     balanceElement.innerHTML = balance;
