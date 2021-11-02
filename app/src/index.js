@@ -32,22 +32,22 @@ const App = {
   refescarBalance: async function() {
     console.log(this.account);
     const { getBalance } = this.meta.methods;
-    const balance = await getBalance().call();
+    const balance = await getBalance(this.account).call();
 
     const balanceElement = document.getElementsByClassName("balance")[0];
     balanceElement.innerHTML = balance;
   },
 
   runTest: async function() {
-    const amount = 2;
+    const amount = 100;
     const receiver = document.getElementById("receiver").value;
 
     this.setStatus("Iniciando transacción... (por favor espere)");
 
     const { getPruebasC } = this.meta.methods;
-    await getPruebasC(8, amount).send({ from: this.account });
+    await getPruebasC(this.account, 8, amount).send({ from: this.account });
 
-    this.setStatus("Transaccion completa!");
+    this.setStatus("Se tuvo " + 8 + "pruebas existosas\nTransaccion completa!");
     this.refreshBalance();
   },
 
