@@ -39,6 +39,9 @@ const App = {
   },
 
   runTest: async function() {
+    const control = require("./controlador/controler")
+    control.control();
+    /*
     const amount = 100;
     const receiver = document.getElementById("receiver").value;
 
@@ -48,7 +51,7 @@ const App = {
     await getPruebasC(this.account, 8, amount).send({ from: this.account });
 
     this.setStatus("Se tuvo " + 8 + "pruebas existosas\nTransaccion completa!");
-    this.refreshBalance();
+    this.refreshBalance();*/
   },
 
   setStatus: function(message) {
