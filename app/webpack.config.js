@@ -7,10 +7,12 @@ module.exports = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath : "http://localhost:8080/unit-contract/app/dist/js",
   },
   plugins: [
     new CopyWebpackPlugin([{ from: "./src/index.html", to: "index.html" }]),
   ],
-  devServer: { contentBase: path.join(__dirname, "dist"), compress: true },
+  devServer: {
+    contentBase: path.join(__dirname, "dist"), 
+    compress: true 
+  },
 };

@@ -39,8 +39,8 @@ const App = {
   },
 
   runTest: async function() {
-    const control = require("./controlador/controler")
-    control.control();
+    const control = require("./controlador/qunit")
+    control.prueba(document.getElementById("meta").value);
     /*
     const amount = 100;
     const receiver = document.getElementById("receiver").value;

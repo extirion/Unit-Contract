@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>MetaCoin | Truffle Webpack Demo w/ Frontend</title>
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/qunit/qunit-1.14.0.css">
   </head>
   <style>
     input {
@@ -16,11 +17,14 @@
     <label for="receiver">Responsable de la funcion:</label>
     <input type="text" id="receiver" placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"/>
     <label for="receiver">Numero de pruebas a realizar:</label>
-    <input type="text" id="meta" placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"/>
+    <input type="text" id="meta" placeholder="e.g. 5"/>
 
     <button onclick="App.runTest()">Ejecutar prueba</button>
 
     <p id="test">Resultado de la prueba es:</p>
+
+    <div id="qunit"></div>
+    <div id="qunit-fixture"></div>
 
     <p id="status"></p>
     <p>
@@ -28,5 +32,6 @@
       errors and warnings.
     </p>
     <script src="index.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
   </body>
 </html>
