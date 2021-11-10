@@ -1,19 +1,12 @@
 function prueba(iteraciones){
+    console.log("hola1");
     const solver = require("../modelo/solver");
 
-    for(i = 1; i <= iteraciones;i++){
-        QUnit.test( "hello test", function(assert) {
-            assert.ok( 1 == 1, "Passed!" );
-        });
-    }    
-/*
-    QUnit.module('solver', function(){
-        QUnit.test('operacion', function(assert){
-            assert.equal(solver('1'),2)
-            assert.equal(solver('1'),1)
-        });
-    });*/
-
+    test( 'Testing solver()', function() {
+        ok( solver.solver("3+1") );
+        ok( solver.solver("5+4+3") );
+        ok( solver.solver("33+2") );
+    } );
 }
 
 module.exports = {

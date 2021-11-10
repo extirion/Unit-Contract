@@ -41,17 +41,19 @@ const App = {
   runTest: async function() {
     const control = require("./controlador/qunit")
     control.prueba(document.getElementById("meta").value);
-    /*
-    const amount = 100;
+    console.log(document.getElementsByClassName("passed")[1].innerHTML);
+
+    const pruebas = document.getElementsByClassName("passed")[1].innerHTML;
+
     const receiver = document.getElementById("receiver").value;
 
     this.setStatus("Iniciando transacción... (por favor espere)");
 
     const { getPruebasC } = this.meta.methods;
-    await getPruebasC(this.account, 8, amount).send({ from: this.account });
+    await getPruebasC(this.account, pruebas).send({ from: this.account });
 
-    this.setStatus("Se tuvo " + 8 + "pruebas existosas\nTransaccion completa!");
-    this.refreshBalance();*/
+    this.setStatus("Se tuvo " + pruebas + "pruebas existosas\nTransaccion completa!");
+    this.refreshBalance();
   },
 
   setStatus: function(message) {

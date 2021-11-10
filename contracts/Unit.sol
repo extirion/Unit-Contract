@@ -19,15 +19,15 @@ contract Unit {
     }
 
     //La idea es que en esta funcion igual se haga el traspso de monto directamente a la dirreccion destino
-    function getPruebasC(address receiver, uint pruebas, uint amount) public returns(bool result){
-        if (balances[msg.sender] > amount){
-            if(pruebas > 5){
-                balances[msg.sender] -= amount;
-                balances[receiver] += amount;
-                //emit Transfer(msg.sender, receiver, amount);
+    function getPruebasC(address receiver, uint pruebas) public returns(bool result){
+        if (balances[msg.sender] > 100){
+            if(pruebas > 6){
+                balances[msg.sender] -= 100;
+                balances[receiver] += 100;
+                //emit Transfer(msg.sender, receiver, 100);
                 return true;
             }else{
-                return false;
+                revert();
             }
         }else{
             revert();
