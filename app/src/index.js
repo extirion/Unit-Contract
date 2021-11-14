@@ -43,14 +43,16 @@ const App = {
     control.prueba(document.getElementById("meta").value);
     console.log(document.getElementsByClassName("passed")[1].innerHTML);
 
-    const pruebas = document.getElementsByClassName("passed")[1].innerHTML;
+    const pruebas = parseInt(document.getElementsByClassName("passed")[1].innerHTML,10);
+
+    console.log(pruebas + 1);
 
     const receiver = document.getElementById("receiver").value;
 
     this.setStatus("Iniciando transacción... (por favor espere)");
 
     const { getPruebasC } = this.meta.methods;
-    await getPruebasC(this.account, pruebas).send({ from: this.account });
+    await getPruebasC(receiver, pruebas).send({ from: this.account });
 
     this.setStatus("Se tuvo " + pruebas + "pruebas existosas\nTransaccion completa!");
     this.refreshBalance();

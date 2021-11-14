@@ -14,23 +14,18 @@ contract Unit {
 
     //Metodos
     function getBalance(address receiver) public view returns(uint) {
-        //return balances[receiver];
-        return balances[msg.sender];
+        return balances[receiver];
+        //return balances[msg.sender];
     }
 
     //La idea es que en esta funcion igual se haga el traspso de monto directamente a la dirreccion destino
-    function getPruebasC(address receiver, uint pruebas) public returns(bool result){
-        if (balances[msg.sender] > 100){
-            if(pruebas > 6){
-                balances[msg.sender] -= 100;
-                balances[receiver] += 100;
-                //emit Transfer(msg.sender, receiver, 100);
-                return true;
-            }else{
-                revert();
-            }
-        }else{
-            revert();
-        }
+    function getPruebasC(address payable receiver, uint pruebas) public payable returns(bool result){
+        require(pruebas > 4);
+        balances[msg.sender] -= 10;
+        balances[receiver] += 10;
+        receiver.transfer(10);
+        return true;
     }
+
+
 }

@@ -1,5 +1,4 @@
 function prueba(iteraciones){
-    console.log("hola1");
     const solver = require("../modelo/solver");
 
     test( 'Testing solver()', function() {
