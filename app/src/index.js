@@ -52,7 +52,7 @@ const App = {
     console.log("balance2 " + balance);
   },
 
-  //Este evento se encarga de ejecutar la funcion de Qunit para realziar las pruebas y de llamar al contrato para validar
+  //Este evento se encarga de ejecutar la funcion de Qunit para realizar las pruebas y de llamar al contrato para validar
   runTest: async function() {
     try{
       const control = require("./controlador/qunit");
