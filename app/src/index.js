@@ -29,20 +29,36 @@ const App = {
     }
   },
 
+  //Este evento se encarga de refrescar la cantidad de tokens que tiene la cuenta creada 
   refescarBalance: async function() {
     console.log(this.account);
     const { getBalance } = this.meta.methods;
     const balance = await getBalance(this.account).call();
 
+    console.log("balance: " + balance)
+
     const balanceElement = document.getElementsByClassName("balance")[0];
     balanceElement.innerHTML = balance;
   },
 
+  obtenerBalance: async function() {
+    const user = document.getElementById("user").value;
+    const { getBalance } = this.meta.methods;
+    const balance = await getBalance(user).call();
+
+    const balanceU = document.getElementById("balance_user");
+    balanceU.innerHTML = balance;
+    console.log("balance2 " + balance);
+  },
+
+  //Este evento se encarga de ejecutar la funcion de Qunit para realziar las pruebas y de llamar al contrato para validar
   runTest: async function() {
-    const control = require("./controlador/qunit")
-    control.prueba(document.getElementById("meta").value);
+    const control = require("./controlador/qunit");
+    const meta_pruebas = document.getElementById("meta").value;
+    control.prueba(meta_pruebas/2);
     console.log(document.getElementsByClassName("passed")[1].innerHTML);
 
+    //Obtiene el numero de pruebas que pasaron
     const pruebas = parseInt(document.getElementsByClassName("passed")[1].innerHTML,10);
 
     console.log(pruebas + 1);
@@ -52,10 +68,16 @@ const App = {
     this.setStatus("Iniciando transacción... (por favor espere)");
 
     const { getPruebasC } = this.meta.methods;
-    await getPruebasC(receiver, pruebas).send({ from: this.account });
+    await getPruebasC(receiver, pruebas, 2).send({ from: this.account });
 
-    this.setStatus("Se tuvo " + pruebas + "pruebas existosas\nTransaccion completa!");
-    this.refreshBalance();
+    if(pruebas > 1){
+      this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion completa!");
+      this.refescarBalance();
+    }else{
+      this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion fallida!");
+      this.refescarBalance();
+    }
+
   },
 
   setStatus: function(message) {

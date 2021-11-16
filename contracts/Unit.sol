@@ -2,30 +2,41 @@
 pragma solidity >=0.4.25;
 
 contract Unit {
+
     //variables
-    mapping (address => uint) balances;
 
-    event Transfer(address indexed _from, address indexed _to, uint256 _value);
+    //Maximo de unitcoin disponibles
+    uint public max_unitcoin = 10002;
 
-    //Constructor
+    //Numero total de unitcoins comprados
+    uint public total_unitcoin_bought = 0;
+    
+    //Registro contable que lleva control del balance del token dentro del contrato
+    mapping (address => uint) balance_unitcoins;
+
+    //Registro de las ultimas pruebas realizadas por los usuarios
+    mapping (address => uint) registro_pruebas;
+    
+    //Constructor del contrato
     constructor() public {
-        balances[msg.sender] = 14000;
+        balance_unitcoins[msg.sender] = max_unitcoin;
     }
-
+    
     //Metodos
+
+
     function getBalance(address receiver) public view returns(uint) {
-        return balances[receiver];
-        //return balances[msg.sender];
+        return balance_unitcoins[receiver];
     }
 
-    //La idea es que en esta funcion igual se haga el traspso de monto directamente a la dirreccion destino
-    function getPruebasC(address payable receiver, uint pruebas) public payable returns(bool result){
-        require(pruebas > 4);
-        balances[msg.sender] -= 10;
-        balances[receiver] += 10;
-        receiver.transfer(10);
-        return true;
+    //Funcion con la que se evalua que el numero de pruebas acertadas sean iguales o mayores a la establecida para recompenzar a un usuario en concreto
+    function getPruebasC(address receiver, uint exitosos, uint prueba) public {
+        require(balance_unitcoins[msg.sender] > 20);
+        if (exitosos > prueba){
+            balance_unitcoins[msg.sender] -= 20;
+            balance_unitcoins[receiver] += 20;
+            registro_pruebas[receiver] = exitosos;
+        }
     }
-
 
 }

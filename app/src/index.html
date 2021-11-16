@@ -21,16 +21,22 @@
 
     <button onclick="App.runTest()">Ejecutar prueba</button>
 
-    <p id="test">Resultado de la prueba es:</p>
-
     <div id="qunit"></div>
     <div id="qunit-fixture"></div>
 
+    <p id="test">Resultado de la prueba es:</p>
+
+    <p>Consultar balance de un usuario en concreto</p>
+    <label for="user">Dirrecion del usuario:</label>
+    <input type="text" id="user" placeholder="e.g. 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"/>
+
+    <p id="balance_user">Balace:</p>
+
+    <button onclick="App.obtenerBalance()">Consultar</button>
+
+    
+
     <p id="status"></p>
-    <p>
-      <strong>Hint:</strong> open the browser developer console to view any
-      errors and warnings.
-    </p>
     <script src="index.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
   </body>
