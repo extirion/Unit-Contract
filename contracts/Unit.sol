@@ -6,7 +6,7 @@ contract Unit {
     //variables
 
     //Maximo de unitcoin disponibles
-    uint public max_unitcoin = 10002;
+    uint public max_unitcoin = 10003;
 
     //Numero total de unitcoins comprados
     uint public total_unitcoin_bought = 0;

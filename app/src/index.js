@@ -41,6 +41,7 @@ const App = {
     balanceElement.innerHTML = balance;
   },
 
+  //Evento que devuelve el balance de los tokens de un usuario en especifico
   obtenerBalance: async function() {
     const user = document.getElementById("user").value;
     const { getBalance } = this.meta.methods;
@@ -53,31 +54,36 @@ const App = {
 
   //Este evento se encarga de ejecutar la funcion de Qunit para realziar las pruebas y de llamar al contrato para validar
   runTest: async function() {
-    const control = require("./controlador/qunit");
-    const meta_pruebas = document.getElementById("meta").value;
-    control.prueba(meta_pruebas/2);
-    console.log(document.getElementsByClassName("passed")[1].innerHTML);
+    try{
+      const control = require("./controlador/qunit");
+      const meta_pruebas = document.getElementById("meta").value;
 
-    //Obtiene el numero de pruebas que pasaron
-    const pruebas = parseInt(document.getElementsByClassName("passed")[1].innerHTML,10);
+      if(meta_pruebas > 0){
+        const receiver = document.getElementById("receiver").value;
+        //Obtiene el numero de pruebas que pasaron
+        control.prueba(meta_pruebas);
+        console.log(document.getElementsByClassName("passed")[1].innerHTML);
+        const pruebas = parseInt(document.getElementsByClassName("passed")[1].innerHTML,10);
+        this.setStatus("Iniciando transacción... (por favor espere)");
 
-    console.log(pruebas + 1);
+        const { getPruebasC } = this.meta.methods;
+        await getPruebasC(receiver, pruebas, 2).send({ from: this.account });
 
-    const receiver = document.getElementById("receiver").value;
+        if(pruebas > 1){
+          this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion completa!");
+          this.refescarBalance();
+        }else{
+          this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion fallida!");
+          this.refescarBalance();
+        }
+      }else{
+        alert("Numero de pruebas ingresada invalida");
+        return;
+      }
 
-    this.setStatus("Iniciando transacción... (por favor espere)");
-
-    const { getPruebasC } = this.meta.methods;
-    await getPruebasC(receiver, pruebas, 2).send({ from: this.account });
-
-    if(pruebas > 1){
-      this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion completa!");
-      this.refescarBalance();
-    }else{
-      this.setStatus("Se tuvo " + pruebas + " pruebas existosas de "+ meta_pruebas +"\nTransaccion fallida!");
-      this.refescarBalance();
+    }catch (err){
+      alert("No se puedo realizar el envio del token");
     }
-
   },
 
   setStatus: function(message) {
@@ -92,7 +98,7 @@ window.addEventListener("load", function() {
   if (window.ethereum) {
     // use MetaMask's provider
     App.web3 = new Web3(window.ethereum);
-    window.ethereum.enable(); // get permission to access accounts
+    window.ethereum.request({method: 'eth_requestAccounts'}); // get permission to access accounts
   } else {
     console.warn(
       "No se detectó web3. Volviendo a http://127.0.0.1:7545. Debe eliminar este respaldo cuando implemente la petición",
