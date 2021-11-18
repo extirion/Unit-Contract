@@ -63,7 +63,7 @@ window.onload = function(){
     const control = require("./controlador/qunit");
     const para = receptor.value;
     const iteracion = iteraciones_prueba.value;
-    const pruebas_validas = 2;
+    const pruebas_validas = 1;
 
     if(Number(iteracion) <= 0) {
       alert('valor no permitido');
@@ -80,9 +80,19 @@ window.onload = function(){
     const pruebas_exitosas = parseInt(document.getElementsByClassName("passed")[1].innerHTML,10);
     status.innerHTML = "Iniciando transacción... (por favor espere)";
 
-    unitContract.methods.getPruebasC(para,pruebas_exitosas,pruebas_validas).send({
+    const test = await unitContract.methods.getPruebasC(para,pruebas_exitosas,pruebas_validas).send({
       from,
     });
+
+    console.log("test: " + test);
+    
+    if(pruebas_exitosas > pruebas_validas){
+      status.innerHTML = "Se tuvo " + pruebas_exitosas + " pruebas existosas de "+ iteracion +"\nTransaccion completa!";
+      refescarBalance();
+    }else{
+      status.innerHTML = "Se tuvo " + pruebas_exitosas + " pruebas existosas de "+ iteracion +"\nTransaccion fallida!";
+      refescarBalance();
+    }
 
   };
 
