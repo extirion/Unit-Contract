@@ -7,15 +7,15 @@ contract Unit {
 
     //Maximo de unitcoin disponibles
     uint public max_unitcoin = 10003;
-
-    //Numero total de unitcoins comprados
-    uint public total_unitcoin_bought = 0;
     
     //Registro contable que lleva control del balance del token dentro del contrato
     mapping (address => uint) balance_unitcoins;
 
     //Registro de las ultimas pruebas realizadas por los usuarios
     mapping (address => uint) registro_pruebas;
+
+    //Eventos
+    event Transfer(address indexed _from, address _to, uint256 _value);
     
     //Constructor del contrato
     constructor() public {
@@ -23,7 +23,6 @@ contract Unit {
     }
     
     //Metodos
-
 
     function getBalance(address receiver) public view returns(uint) {
         return balance_unitcoins[receiver];
@@ -36,6 +35,7 @@ contract Unit {
             balance_unitcoins[msg.sender] -= 20;
             balance_unitcoins[receiver] += 20;
             registro_pruebas[receiver] = exitosos;
+            emit Transfer(msg.sender, receiver, 20);
         }
     }
 
