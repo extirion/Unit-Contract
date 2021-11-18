@@ -7,10 +7,10 @@ contract Unit {
 
     string public name;
     string public symbol;
-    string public decimals;
+    uint8 public decimals;
 
     //Maximo de unitcoin disponibles
-    uint public max_unitcoin = 10003;
+    uint public max_unitcoin;
     
     //Registro contable que lleva control del balance del token dentro del contrato
     mapping (address => uint256) public balance_unitcoins;
@@ -23,8 +23,13 @@ contract Unit {
     event Approval(address indexed _owner,address indexed _spender, uint _value);
     
     //Constructor del contrato
-    constructor() public {
+    constructor(string memory _name, string memory _symbol, uint8 _decimals, uint256 _totalUnitCoins) public {
+        name = _name;
+        symbol = _symbol;
+        decimals = _decimals;
+        max_unitcoin = _totalUnitCoins;
         balance_unitcoins[msg.sender] = max_unitcoin;
+        emit Transfer(address(0), msg.sender, _totalUnitCoins);
     }
     
     //Metodos
