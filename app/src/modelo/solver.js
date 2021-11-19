@@ -10,7 +10,6 @@ function solver(operation){
 		if (!isNaN(operation[i])) {
 			if (i < operation.length-1) {
 				numero += operation[i];
-				console.log(numero);
 			}else{
 				numero += operation[i];
 				numeros.push(parseInt(numero,10));
@@ -19,26 +18,20 @@ function solver(operation){
 			//Valida si el carcter, al no ser un numero, es un simbolo de operacion permitido
 			if (simbolo(operation[i]) == true) {
 				if(i < operation.length-1){
-					console.log(operation[i])
 					operaciones.push(operation[i]);
 					numeros.push(parseInt(numero,10));
 					numero = "";
 				}else{
-					console.log(operation[i])
 					operaciones.push(operation[i]);
 					numeros.push(parseInt(numero,10));
 					numeros.push(0);
 				}
 			}else{
 				//Si no lo es termina el proceso
-				console.log("caracter no valido: " + i);
 				break;
 			}
 		}
 	}
-
-	console.log(numeros);
-	console.log(operaciones);
 
 	let solucion = 0;
 	//Ciclo para resolver la operación ingresada
@@ -69,7 +62,6 @@ function solver(operation){
 			}
 		}
 	}
-	console.log(solucion);
 	return solucion
 }
 

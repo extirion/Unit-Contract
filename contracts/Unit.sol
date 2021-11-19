@@ -33,7 +33,7 @@ contract Unit {
     }
     
     //Metodos
-
+    //FUncion que retorna el balace de tokens que lleva un usuario en concreto al recibir como parametro su direccion publica
     function getBalance(address receiver) public view returns(uint256) {
         return balance_unitcoins[receiver];
     }

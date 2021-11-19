@@ -1,13 +1,8 @@
 function prueba(iteraciones){
     const solver = require("../modelo/solver");
-
     test( 'Testing solver()', function() {
-        ok( solver.solver("3+1") );
-        ok( solver.solver("3+1") );
-        /*
         for(i = 0;i<iteraciones;i++){
-            operacion = Math.random()*3
-            console.log("operacion: " + operacion)
+            operacion = Math.floor((Math.random() * (3 - 1 + 1)) + 1);
             if(operacion == 1){
                 ok( solver.solver("3+1") );
             }else if(operacion == 2){
@@ -17,7 +12,7 @@ function prueba(iteraciones){
             }else{
                 ok( solver.solver("4l3"));
             }
-        }*/
+        }
     } );
 }
 
